@@ -6,7 +6,7 @@ node {
   }
   stage('打包，部署网站') {
   //使用NodeJS的npm进行打包
-    nodejs('nodeJS16'){
+    nodejs('NodeJS14'){
       sh '''
         npm install
         npm run build:prod
