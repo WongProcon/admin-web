@@ -437,7 +437,7 @@ import {getWebConfig} from "@/api/blog/home";
 import {authVerify} from "@/api/blog/user";
 import {setBlogToken, getBlogToken, removeBlogToken} from "@/utils/auth";
 import {mapMutations} from "vuex";
-import {removeToken} from "../../../procon-ui-admin/src/utils/auth";
+
 
 export default {
   name: "index",
