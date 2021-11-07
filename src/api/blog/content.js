@@ -1,43 +1,65 @@
-/**  博客信息接口*/
-import request from '@/utils/request'
+
+import request from "@/utils/request";
 
 // 查询博客列表
-export function listContent(query) {
+export function listBlog(query) {
   return request({
-    url: '/blog/content/list',
-    method: 'get',
+    url: '/blog/admin/blogMgr/getList',
+    method: 'GET',
     params: query
   })
 }
 
-/**  根据id查博客*/
-export function getBlogById(id) {
+// 添加博客
+export function addBlog(data) {
   return request({
-    url: '/blog/web/blogInfo/get/' + id,
-    method: 'get'
+    url: '/blog/admin/blogMgr/add',
+    method: 'post',
+    data: data
   })
 }
 
-/**  根据id查相似博客*/
-export function getSameBlogByBlogId(id) {
+// 修改博客
+export function updateContent(data) {
   return request({
-    url: '/blog/web/blogInfo/getSameBlog/' + id,
-    method: 'get'
+    url: '/blog/admin/blogMgr/update',
+    method: 'post',
+    data: data
   })
 }
 
-
-export function getBlogPraiseCount(id) {
+// 删除博客
+export function delContent(id) {
   return request({
-    url: '/blog/web/blogInfo/getBlogPraiseCount/' + id,
-    method: 'get'
+    url: '/blog/admin/blogMgr/' + id,
+    method: 'delete'
   })
 }
 
-/**  给博客点赞*/
-export function praiseBlogById(id) {
+// 查询博客详细
+export function getContent(id) {
   return request({
-    url: '/blog/authWeb/blog/praiseBlogById/' + id,
+    url: '/blog/admin/blogMgr/get/' + id,
     method: 'get'
+  })
+}
+//文件上传
+export function fileUpload(data) {
+  return request({
+    url: '/file/file/add',
+    method: 'post',
+    data: data,
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+}
+
+/** 批量修改 */
+export function editBatchBlog(data) {
+  return request({
+    url: '/blog/admin/blogMgr/editBatch',
+    method: 'post',
+    data: data
   })
 }

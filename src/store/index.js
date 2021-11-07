@@ -1,18 +1,23 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import app from './app'
-import user from './user'
+import app from './modules/app'
+import user from './modules/user'
+import tagsView from './modules/tagsView'
+import permission from './modules/permission'
+import settings from './modules/settings'
+import getters from './getters'
 
-//让vuex生效
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
-
-  // 将app和user放在store中
   modules: {
     app,
-    user
-  }
+    user,
+    tagsView,
+    permission,
+    settings
+  },
+  getters
 })
 
-export default  store
+export default store

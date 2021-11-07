@@ -1,8 +1,11 @@
 ## 开发
 
 ```bash
+# 克隆项目
+git clone https://gitee.com/y_project/procon-Vue
+
 # 进入项目目录
-cd procon-ui-admin
+cd procon-ui
 
 # 安装依赖
 npm install
@@ -24,4 +27,24 @@ npm run build:stage
 
 # 构建生产环境
 npm run build:prod
+```
+
+## 如果需要部署子目录比如
+```
+https:www.procon.vip/admin
+1.修改vue.config.js中的publicPath属性
+
+
+publicPath: process.env.NODE_ENV === "production" ? "/admin/" : "/admin/",
+2、修改router/index.js，添加一行base属性
+
+export default new Router({
+base: "/admin", //假设子目录是 admin 可以替换为自己的
+mode: 'history', // 去掉url中的#
+scrollBehavior: () => ({ y: 0 }),
+routes: constantRoutes
+})
+3、修改layout/components/Navbar.vue中的location.href
+
+location.href = this.$router.options.base + '/index';
 ```

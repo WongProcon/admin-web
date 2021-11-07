@@ -1,17 +1,6 @@
 import { Message } from 'element-ui'
-// import {showdown} from 'showdown'
-// import {TurndownService} from 'turndown'
 
-/** **********************************************************/
-/**
- *  全局状态码
- */
-const ECode = {
-  '401': '认证失败，无法访问系统资源',
-  '403': '当前操作没有权限',
-  '404': '访问资源不存在',
-  'default': '系统未知错误,请反馈给管理员'
-}
+
 
 /** **********************************************************/
 
@@ -32,24 +21,27 @@ const FUNCTIONS = {
     }
     return str.substr(0, str.length - 1)
   },
-  /**
-   * 字符串转标签
-   * @param str
-   * @returns {Array}
-   */
-  stringToTags: str => {
-    if (str !== null && str !== '') {
-      return str.split(',')
-    } else {
-      return []
-    }
-  },
   // 切割字符串
   splitStr: (str, flagCount) => {
     if (str == null || str == '') {
       return ""
     } else if(str.length > flagCount) {
       return str.substring(0, flagCount) + "..."
+    } else {
+      return str
+    }
+  },
+  /**
+   * 切割字符串
+   * @param str
+   * @param count
+   * @returns {string|*}
+   */
+  strSubstring: (str, count) => {
+    if (str == null || str == '') {
+      return ""
+    } else if(str.length > count) {
+      return str.substring(0, count) + "..."
     } else {
       return str
     }
@@ -72,7 +64,8 @@ const FUNCTIONS = {
    * @param text
    */
   markdownToHtml: text => {
-    let converter = new showdown.Converter();
+    let converter = new showdown.Converter({tables: true});
+    let html = converter.makeHtml(text)
     return converter.makeHtml(text);
   },
   /**
@@ -81,6 +74,33 @@ const FUNCTIONS = {
    */
   htmlToMarkdown: text => {
     var turndownService = new TurndownService()
+
+    // 用于提取代码语言
+    turndownService.addRule('CodeBlock', {
+      filter: function (node, options) {
+        return (
+          node.nodeName === 'PRE' &&
+          node.firstChild &&
+          node.firstChild.nodeName === 'CODE'
+        )
+      },
+      replacement: function (content, node, options) {
+        var className = node.firstChild.getAttribute('class') || ''
+        var language = (className.match(/language-(\S+)/) || [null, ''])[1]
+        return (
+          '\n\n' + options.fence + language + '\n' +
+          node.firstChild.textContent +
+          '\n' + options.fence + '\n\n'
+        )
+      }
+    })
+
+    var turndownPluginGfm = require('turndown-plugin-gfm')
+    var gfm = turndownPluginGfm.gfm
+    var tables = turndownPluginGfm.tables
+    var strikethrough = turndownPluginGfm.strikethrough
+    turndownService.use(gfm)
+    turndownService.use([tables, strikethrough])
     return turndownService.turndown(text)
   },
   /**

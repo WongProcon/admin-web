@@ -1,19 +1,29 @@
 import Cookies from 'js-cookie'
 
-const TokenKey = 'Blog-Token'
+const TokenKey = 'Admin-Token'
 
+const ExpiresInKey = 'Admin-Expires-In'
 
-export function getBlogToken() {
+export function getToken() {
   return Cookies.get(TokenKey)
 }
 
-export function setBlogToken(token,expireTime) {
-  return Cookies.set(TokenKey, token,{expires:expireTime})
+export function setToken(token) {
+  return Cookies.set(TokenKey, token)
 }
 
-export function removeBlogToken() {
+export function removeToken() {
   return Cookies.remove(TokenKey)
 }
 
+export function getExpiresIn() {
+  return Cookies.get(ExpiresInKey) || -1
+}
 
+export function setExpiresIn(time) {
+  return Cookies.set(ExpiresInKey, time)
+}
 
+export function removeExpiresIn() {
+  return Cookies.remove(ExpiresInKey)
+}
