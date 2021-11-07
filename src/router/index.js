@@ -26,7 +26,7 @@ export const routes = [
 ]
 
 export default new VueRouter({
-  base: "/blog", //假设子目录是 admin 可以替换为自己的
+  base: "/", //假设子目录是 admin 可以替换为自己的
   mode: 'history', // 去掉url中的#
   scrollBehavior: () => ({ y: 0 }),
   routes: routes
