@@ -2,10 +2,7 @@
 
 ```bash
 # 克隆项目
-git clone https://gitee.com/y_project/procon-Vue
-
-# 进入项目目录
-cd procon-ui
+git@github.com:WongProcon/admin-web.git
 
 # 安装依赖
 npm install
@@ -31,7 +28,7 @@ npm run build:prod
 
 ## 如果需要部署子目录比如
 ```
-https:www.procon.vip/admin
+https:www.huangpuguang.com/admin
 1.修改vue.config.js中的publicPath属性
 
 
