@@ -269,7 +269,7 @@ export default {
           this.$modal.msgSuccess("成功生成到自定义路径：" + row.genPath);
         });
       } else {
-        this.$download.zip("/code/gen/batchGenCode?tables=" + tableNames, "ruoyi");
+        this.$download.zip("/code/gen/batchGenCode?tables=" + tableNames, "procon");
       }
     },
     /** 同步数据库操作 */
