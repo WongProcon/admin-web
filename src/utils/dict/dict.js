@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import { mergeRecursive } from "@/utils/procon";
 import DictMeta from './DictMeta'
-import DictData from './DictData'
+import DictData from '@/components/DictData'
 
 const DEFAULT_DICT_OPTIONS = {
   types: [],

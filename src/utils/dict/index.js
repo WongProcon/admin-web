@@ -1,4 +1,4 @@
-import Dict from './Dict'
+import Dict from './dict'
 import { mergeOptions } from './DictOptions'
 
 export default function(Vue, options) {
