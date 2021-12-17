@@ -2,7 +2,12 @@
   <div>
     <el-tabs type="border-card">
       <el-tab-pane label="秒" v-if="shouldHide('second')">
-        <CrontabSecond @update="updateCrontabValue" :check="checkNumber" ref="cronsecond" />
+        <CrontabSecond
+          @update="updateCrontabValue"
+          :check="checkNumber"
+          :cron="crontabValueObj"
+          ref="cronsecond"
+        />
       </el-tab-pane>
 
       <el-tab-pane label="分钟" v-if="shouldHide('min')">
@@ -65,34 +70,34 @@
         <p class="title">时间表达式</p>
         <table>
           <thead>
-          <th v-for="item of tabTitles" width="40" :key="item">{{item}}</th>
-          <th>Cron 表达式</th>
+            <th v-for="item of tabTitles" width="40" :key="item">{{item}}</th>
+            <th>Cron 表达式</th>
           </thead>
           <tbody>
-          <td>
-            <span>{{crontabValueObj.second}}</span>
-          </td>
-          <td>
-            <span>{{crontabValueObj.min}}</span>
-          </td>
-          <td>
-            <span>{{crontabValueObj.hour}}</span>
-          </td>
-          <td>
-            <span>{{crontabValueObj.day}}</span>
-          </td>
-          <td>
-            <span>{{crontabValueObj.month}}</span>
-          </td>
-          <td>
-            <span>{{crontabValueObj.week}}</span>
-          </td>
-          <td>
-            <span>{{crontabValueObj.year}}</span>
-          </td>
-          <td>
-            <span>{{crontabValueString}}</span>
-          </td>
+            <td>
+              <span>{{crontabValueObj.second}}</span>
+            </td>
+            <td>
+              <span>{{crontabValueObj.min}}</span>
+            </td>
+            <td>
+              <span>{{crontabValueObj.hour}}</span>
+            </td>
+            <td>
+              <span>{{crontabValueObj.day}}</span>
+            </td>
+            <td>
+              <span>{{crontabValueObj.month}}</span>
+            </td>
+            <td>
+              <span>{{crontabValueObj.week}}</span>
+            </td>
+            <td>
+              <span>{{crontabValueObj.year}}</span>
+            </td>
+            <td>
+              <span>{{crontabValueString}}</span>
+            </td>
           </tbody>
         </table>
       </div>
@@ -268,7 +273,7 @@ export default {
           insValue = 5;
         } else {
           this.$refs[refName].checkboxList = value.split(",");
-          insValue = 7;
+          insValue = 6;
         }
       } else if (name == "year") {
         if (value == "") {
