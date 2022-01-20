@@ -3,8 +3,6 @@
  * Copyright (c) 2019 Procon
  */
 
-const baseURL = process.env.VUE_APP_BASE_API
-
 // 日期格式化
 export function parseTime(time, pattern) {
   if (arguments.length === 0 || !time) {
@@ -18,7 +16,7 @@ export function parseTime(time, pattern) {
     if ((typeof time === 'string') && (/^[0-9]+$/.test(time))) {
       time = parseInt(time)
     } else if (typeof time === 'string') {
-      time = time.replace(new RegExp(/-/gm), '/').replace('T', ' ').replace(new RegExp(/\.[\d]{3}/gm),'');
+      time = time.replace(new RegExp(/-/gm), '/').replace('T', ' ').replace(new RegExp(/\.[\d]{3}/gm), '');
     }
     if ((typeof time === 'number') && (time.toString().length === 10)) {
       time = time * 1000
@@ -82,22 +80,20 @@ export function selectDictLabel(datas, value) {
 
 // 回显数据字典（字符串数组）
 export function selectDictLabels(datas, value, separator) {
+  if(value === undefined) {
+    return "";
+  }
   var actions = [];
   var currentSeparator = undefined === separator ? "," : separator;
   var temp = value.split(currentSeparator);
   Object.keys(value.split(currentSeparator)).some((val) => {
     Object.keys(datas).some((key) => {
-      if (datas[key].dictValue == ('' + temp[val])) {
-        actions.push(datas[key].dictLabel + currentSeparator);
+      if (datas[key].value == ('' + temp[val])) {
+        actions.push(datas[key].label + currentSeparator);
       }
     })
   })
   return actions.join('').substring(0, actions.join('').length - 1);
-}
-
-// 通用下载方法
-export function download(fileName) {
-  window.location.href = baseURL + "/common/download?fileName=" + encodeURI(fileName) + "&delete=" + true;
 }
 
 // 字符串格式化(%s )
@@ -115,7 +111,7 @@ export function sprintf(str) {
 }
 
 // 转换字符串，undefined,null等转化为""
-export function praseStrEmpty(str) {
+export function parseStrEmpty(str) {
   if (!str || str == "undefined" || str == "null") {
     return "";
   }
@@ -131,7 +127,7 @@ export function mergeRecursive(source, target) {
       } else {
         source[p] = target[p];
       }
-    } catch(e) {
+    } catch (e) {
       source[p] = target[p];
     }
   }
@@ -214,7 +210,6 @@ export function tansParams(params) {
   }
   return result
 }
-
 
 // 验证是否为blob格式
 export async function blobValidate(data) {
