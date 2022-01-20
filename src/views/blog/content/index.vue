@@ -244,18 +244,6 @@
             <em class="el-icon-error inputClass" v-show="icon" @click="deletePhoto()" @mouseover="icon = true"></em>
             <img @mouseover="icon = true" @mouseout="icon = false" v-bind:src="form.photoList[0]" style="display:inline; width: 195px;height: 105px;">
           </div>
-          <!--<div v-else >-->
-          <!--  <el-upload-->
-          <!--    class="avatar-uploader"-->
-          <!--    action=""-->
-          <!--    accept=".jpg, .jpeg, .png"-->
-          <!--    :before-upload="beforeAvatarUpload"-->
-          <!--    :http-request='submitUpload'-->
-          <!--    :show-file-list = "false">-->
-          <!--      <img v-if="imageUrl" :src="imageUrl" class="avatar">-->
-          <!--      <em v-else class="el-icon-plus avatar-uploader-icon"></em>-->
-          <!--    </el-upload>-->
-          <!--</div>-->
           <div v-else class="uploadImgBody" @click="checkPhoto">
             <em class="el-icon-plus avatar-uploader-icon"></em>
           </div>
@@ -759,20 +747,6 @@ export default {
         let url = response.data;
         this.$refs.md.$img2Url(pos, url)
       });
-    },
-
-    beforeAvatarUpload(file) {
-      // const isJPG = file.type === 'image/jpeg';
-      // const isPNG = file.type === 'image/png';
-      // const isLt2M = file.size / 1024 / 1024 < 4;
-      //
-      // if (!isJPG || !isPNG) {
-      //   this.$message.error('上传头像图片只能是 JPG或PNG 格式!');
-      // }
-      // if (!isLt2M) {
-      //   this.$message.error('上传头像图片大小不能超过 4MB!');
-      // }
-      // return isJPG && isLt2M;
     },
 
     // 上传文件
