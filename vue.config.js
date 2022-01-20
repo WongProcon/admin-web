@@ -7,6 +7,7 @@ const defaultSettings = require('./src/settings.js')
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
+const CompressionPlugin = require('compression-webpack-plugin')
 
 const name = defaultSettings.title || 'Procon博客' // 标题
 
@@ -67,7 +68,14 @@ module.exports = {
 
         // Append translations to the file matching the `app` name.
         translationsOutputFile: /app/
-      } )
+      } ),
+      new CompressionPlugin({
+        test: /\.(js|css|html)?$/i,     // 压缩文件格式
+        filename: '[path].gz[query]',   // 压缩后的文件名
+        algorithm: 'gzip',              // 使用gzip压缩
+        threshold: 10240,               // 对超过10K的数据压缩
+        minRatio: 0.8                   // 压缩率小于1才会压缩
+      })
     ]
   },
 
