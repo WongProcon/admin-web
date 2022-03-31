@@ -340,7 +340,7 @@
           <el-input v-model="form.author" auto-complete="off" style="width: 80%;"></el-input>
         </el-form-item>
 
-        <el-form-item label="文章出处" :label-width="formLabelWidth" v-if="form.isOriginal==0">
+        <el-form-item label="文章出处" :label-width="formLabelWidth" v-if="form.isOriginal===0">
           <el-input v-model="form.articlesPart" auto-complete="off" style="width: 80%"></el-input>
         </el-form-item>
 
@@ -607,6 +607,7 @@ export default {
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
+          debugger
           //获取CKEditor中的内容
           this.form.content = this.editorData;
           this.form.tagId = this.tagValue.join(",");
@@ -715,7 +716,7 @@ export default {
     },
     /** 删除图片*/
     deletePhoto: function() {
-      this.form.photoList = null;
+      this.form.photoList = [];
       this.form.fileId = "";
     },
     checkPhoto() {
@@ -763,7 +764,8 @@ export default {
       this.photoVisible = false;
       this.photoList = data.photoList;
       this.fileIds = data.fileIds;
-      let fileId = this.fileIds.replace(",", "");
+      console.log(data)
+      let fileId = this.fileIds;
       if (this.photoList.length >= 1) {
         this.form.fileId = fileId;
         this.form.photoList = this.photoList;

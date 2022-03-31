@@ -97,7 +97,6 @@ export default {
       params.pageNum = 1;
       params.isShow = 1;
       getPictureSortList(params).then(function(response) {
-          debugger
           let pictureSorts = response.rows;
           that.pictureSorts = pictureSorts;
           //默认初始化第一个
@@ -240,7 +239,6 @@ export default {
       params.isShow = 1;
       params.keyword = this.keyword
       getPictureSortList(params).then(function(response) {
-          debugger
           let pictureSorts = response.rows;
           that.pictureSorts = pictureSorts;
           if (pictureSorts.length <= 0) {
@@ -337,7 +335,7 @@ export default {
           return;
         }
       }
-      console.log("fileIds的内容", this.form.fileIds);
+
       if (this.form.fileIds != null) {
         if (this.form.fileIds.indexOf(fileId) !== -1) {
           this.$message({
@@ -350,7 +348,14 @@ export default {
 
       this.form.photoList.push(fileUrl);
       this.$forceUpdate();
-      this.form.fileIds = this.form.fileIds + "," + fileId;
+      debugger
+      if(this.form.fileIds != null && this.form.fileIds !== ""){
+        console.log("fileIds的内容11", this.form.fileIds);
+        this.form.fileIds = this.form.fileIds + "," + fileId;
+      }else {
+        this.form.fileIds = fileId
+      }
+      console.log("fileIds的内容", this.form.fileIds);
       this.$message({
         message: "添加成功",
         type: "success"
