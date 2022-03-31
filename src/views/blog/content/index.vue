@@ -611,17 +611,20 @@ export default {
           //获取CKEditor中的内容
           this.form.content = this.editorData;
           this.form.tagId = this.tagValue.join(",");
-          this.form.fileId = this.fileId;
+          this.form.fileId = this.fileIds;
+          console.log(this.fileIds)
+          console.log(this.form.fileId)
+          debugger
           this.form.status = 0;
           if (this.form.id != null) {
             updateContent(this.form).then(response => {
-              this.msgSuccess("修改成功");
+              this.$modal.msgSuccess("修改成功");
               this.dialogFormVisible = false;
               this.getList();
             });
           } else {
             addBlog(this.form).then(response => {
-              this.msgSuccess("新增成功");
+              this.$modal.msgSuccess("新增成功");
               this.dialogFormVisible = false;
               this.getList();
             });
@@ -640,7 +643,7 @@ export default {
         return delContent(ids);
       }).then(() => {
         this.getList();
-        this.msgSuccess("删除成功");
+        this.$modal.msgSuccess("删除成功");
       })
     },
     /** 查询博客标签列表 */
@@ -695,16 +698,14 @@ export default {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
           type: "warning"
-        })
-          .then(() => {
+        }).then(() => {
             // 清空触发器
             clearInterval(this.interval);
             this.isChange = false;
             this.changeCount = 0
             done();
-          })
-          .catch(() => {
-            this.$commonUtil.message.info("已取消")
+          }).catch(() => {
+            this.$modal.msgWarning("已取消")
           });
       } else {
         // 清空触发器

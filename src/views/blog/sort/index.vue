@@ -218,13 +218,13 @@ export default {
         if (valid) {
           if (this.form.id != null) {
             updateBlogSort(this.form).then(response => {
-              this.msgSuccess("修改成功");
+              this.$modal.msgSuccess("修改成功");
               this.open = false;
               this.getList();
             });
           } else {
             addBlogSort(this.form).then(response => {
-              this.msgSuccess("新增成功");
+              this.$modal.msgSuccess("新增成功");
               this.open = false;
               this.getList();
             });
@@ -243,7 +243,7 @@ export default {
         return delBlogSort(ids);
       }).then(() => {
         this.getList();
-        this.msgSuccess("删除成功");
+        this.$modal.msgSuccess("删除成功");
       })
     },
   }

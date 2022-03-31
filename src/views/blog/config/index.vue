@@ -325,7 +325,7 @@ export default {
       debugger
       form.logo = this.indexLogo
       updateConfig(form).then(response => {
-        this.msgSuccess("修改成功");
+        this.$modal.msgSuccess("修改成功");
         this.getWebConfigFun();
       });
     },

@@ -76,7 +76,7 @@ export default {
         list[a].sort = list.length - a;
       }
       editBatchBlog(list).then(response => {
-        this.msgSuccess(response.msg);
+        this.$modal.msgSuccess(response.msg);
       });
     },
   }
